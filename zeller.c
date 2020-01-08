@@ -20,11 +20,13 @@ int main(){
 }
 
 int zeller(int year, int month, int day, int *dtw){
-  int h=0;
-  int r=0;
+  int h = 0;
+  int r = 0;
   int k = 0;//0:グレコリオ暦  1:ユリウス暦
-  int c=0;
+  int c = 0;
   int y = 0;
+  int FlagLeepYear = 0;
+
   if(year == 4 && month < 3)  return 1;
   if(year == 4 && month == 3 && day == 1) return 1;
   if(year < 4)  return 1;
@@ -32,6 +34,19 @@ int zeller(int year, int month, int day, int *dtw){
   if(month > 12) return 2;
 
   if(year == 1582 && month == 10 && (5 <= day && day <= 14)) return 3;
+
+  if(year % 4 == 0 && !(year % 100 == 0 && year % 400 != 1)) FlagLeepYear = 1;
+  switch (month) {
+    case 4:
+    case 6:
+    case 9:
+    case 11:
+      if(day > 30) return 4;
+    case 2:
+      if(day > 28 + FlagLeepYear) return 4;
+    default:
+      if(day > 31) return 4;
+  }
 
  if(year == 1582 && month == 10 && day <= 4) k = 1;
 
