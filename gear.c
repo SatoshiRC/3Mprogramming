@@ -21,7 +21,9 @@ int main(){
 	printf("input...\n");
 
 	do{
+#ifdef DEBUG
 		printf("%f",input.sokuhi);
+#endif //DEBUG
 		printf("速比>>>>");
 		scanf("%lf",&input.sokuhi);
 	}while(input.sokuhi <= 1.0);
@@ -30,7 +32,9 @@ int main(){
 		printf("許容誤差(%%)>>>>");
 		scanf("%lf",&input.error);
 		input.error /= 100.0;
+#ifdef DEBUG
 		printf("%f\n",input.error );
+#endif //DEBUG
 	}while(input.error < 0  || 1 < input.error);
 
 	do{
