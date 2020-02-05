@@ -27,7 +27,7 @@ int main(){
 	}while(input.sokuhi <= 1.0);
 
 	do{
-		printf("許容誤差(%)>>>>");
+		printf("許容誤差(%%)>>>>");
 		scanf("%lf",&input.error);
 		input.error /= 100.0;
 		printf("%f\n",input.error );
