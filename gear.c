@@ -3,8 +3,8 @@
 typedef struct{
 	int z1;
 	int z2;
-	double rate;
-	double dif;
+	double sokuhi1;
+	double gosa;
 }resultData_t;
 
 typedef struct{
@@ -21,16 +21,20 @@ int main(){
 	printf("input...\n");
 
 	do{
+#ifdef DEBUG
 		printf("%f",input.sokuhi);
+#endif //DEBUG
 		printf("速比>>>>");
 		scanf("%lf",&input.sokuhi);
 	}while(input.sokuhi <= 1.0);
 
 	do{
-		printf("許容誤差(%)>>>>");
+		printf("許容誤差(%%)>>>>");
 		scanf("%lf",&input.error);
 		input.error /= 100.0;
+#ifdef DEBUG
 		printf("%f\n",input.error );
+#endif //DEBUG
 	}while(input.error < 0  || 1 < input.error);
 
 	do{
@@ -56,18 +60,18 @@ int main(){
 #ifdef DEBUG
 			printf("%d\t", result.z2);
 #endif //DEBUG
-			result.rate = (double)result.z2 / (double)result.z1;
+			result.sokuhi1 = (double)result.z2 / (double)result.z1;
 #ifdef DEBUG
 			printf("%f\t", result.rate);
 			printf("%f\t", input.sokuhi + input.sokuhi * input.error);
 			printf("%f\n", input.sokuhi - input.sokuhi * input.error);
 #endif //DEBUG
-			if(input.sokuhi - input.sokuhi * input.error <= result.rate && result.rate <= input.sokuhi + input.sokuhi * input.error ){
-				result.dif = result.rate - input.sokuhi;
-				printf("%d\t%d\t%f\t%f\n",result.z1 ,result.z2 ,result.rate ,result.dif);
+			if(input.sokuhi - input.sokuhi * input.error <= result.sokuhi1 && result.sokuhi1 <= input.sokuhi + input.sokuhi * input.error ){
+				result.gosa = result.sokuhi1 - input.sokuhi;
+				printf("%d\t%d\t%f\t%f\n",result.z1 ,result.z2 ,result.sokuhi1 ,result.gosa);
 			}
 			result.z2++;
-			if(result.z2 >= input.zMax)	break;
+			if(result.z2 > input.zMax)	break;
 
 		}
 	}
